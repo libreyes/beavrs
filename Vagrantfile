@@ -6,42 +6,42 @@ VAGRANTFILE_API_VERSION = "2"
 
 def parse_environment()
   parsed = { # We may want to change these defaults
-    name: "php_dev",
-    cpus: 1,
-    memory: 512,
-    host_ip: "10.0.10.42",
-    http_port: 9001,
-    mysql_port: 9002,
-    pgsql_port: 9003,
-    mysql: false,
-    pgsql: false,
+    :name => "php_dev",
+    :cpus => 1,
+    :memory => 512,
+    :host_ip => "10.0.10.42",
+    :http_port => 9001,
+    :mysql_port => 9002,
+    :pgsql_port => 9003,
+    :mysql => false,
+    :pgsql => false,
   }
-  parsed.name = ENV["PHPDEVVM_NAME"] if ENV["PHPDEVVM_NAME"]
-  parsed.host_ip = ENV["PHPDEVVM_HOSTIP"] if ENV["PHPDEVVM_HOSTIP"]
+  parsed[:name] = ENV["PHPDEVVM_NAME"] if ENV["PHPDEVVM_NAME"]
+  parsed[:host_ip] = ENV["PHPDEVVM_HOSTIP"] if ENV["PHPDEVVM_HOSTIP"]
   if ENV["PHPDEVVM_MYSQL"] then
-    parsed.mysql = true
+    parsed[:mysql] = true
   end
   if ENV["PHPDEVVM_PGSQL"] then
-    parsed.pgsql = true
+    parsed[:pgsql] = true
   end
   # This is the simplest way to do it safely
   begin
-    parsed.cpus = Integer(ENV["PHPDEVVM_CPUS"])
+    parsed[:cpus] = Integer(ENV["PHPDEVVM_CPUS"])
   rescue; end
   begin
-    parsed.memory = Integer(ENV["PHPDEVVM_CPUS"])
+    parsed[:memory] = Integer(ENV["PHPDEVVM_CPUS"])
   rescue; end
   begin
-    parsed.http_port = Integer(ENV["PHPDEVVM_HTTP_PORT"])
+    parsed[:http_port] = Integer(ENV["PHPDEVVM_HTTP_PORT"])
   rescue; end
-  if parsed.mysql then
+  if parsed[:mysql] then
     begin
-      parsed.mysql_port = Integer(ENV["PHPDEVVM_MYSQL_PORT"])
+      parsed[:mysql_port] = Integer(ENV["PHPDEVVM_MYSQL_PORT"])
     rescue; end
   end
-  if parsed.pgsql then
+  if parsed[:pgsql] then
     begin
-      parsed.pgsql_port = Integer(ENV["PHPDEVVM_PGSQL_PORT"])
+      parsed[:pgsql_port] = Integer(ENV["PHPDEVVM_PGSQL_PORT"])
     rescue; end
   end
   return parsed
@@ -52,10 +52,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "precise64"
   config.vm.box_url = "http://files.vagrantup.com/precise64.box"
 
-  config.vm.network "forwarded_port", guest: 80, host: parsed_env.http_port
+  config.vm.network "forwarded_port", guest: 80, host: parsed_env[:http_port]
 
   # One for the local machine to have a consistent IP to use
-  config.vm.network "private_network", ip: parsed_env.host_ip
+  config.vm.network "private_network", ip: parsed_env[:host_ip]
   # One for the network as a whole
   config.vm.network "public_network"
 
