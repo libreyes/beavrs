@@ -13,6 +13,8 @@ def parse_environment()
     http_port: 9001,
     mysql_port: 9002,
     pgsql_port: 9003,
+    mysql: false,
+    pgsql: false,
   }
   parsed.name = ENV["PHPDEVVM_NAME"] if ENV["PHPDEVVM_NAME"]
   parsed.host_ip = ENV["PHPDEVVM_HOSTIP"] if ENV["PHPDEVVM_HOSTIP"]
