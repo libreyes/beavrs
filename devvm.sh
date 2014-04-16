@@ -10,10 +10,10 @@ export PHPDEVVM_NAME=beavrs \
        PHPDEVVM_HTTP_PORT=9020 \
        PHPDEVVM_MYSQL_PORT=9120
 
-pushd deployment
+pushd deployment > /dev/null
 # Takes all the arguments and passes them to vagrant
 # e.g. ./devvm.sh up -> vagrant up
 vagrant $@
 RET=$?
-popd
+popd > /dev/null
 exit $?
