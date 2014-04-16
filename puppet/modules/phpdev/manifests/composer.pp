@@ -2,8 +2,9 @@ class phpdev::composer {
   
   file {"/var/www":
     ensure => 'directory',
-    owner => 'root',
-    group => 'www-data',
+    owner => 'vagrant',
+    group => 'vagrant',
+    require => Package['apache2'],
   }
 
   exec { "composer:fetch":

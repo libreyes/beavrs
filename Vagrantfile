@@ -8,7 +8,7 @@ def parse_environment()
   parsed = { # We may want to change these defaults
     :name => "php_dev",
     :cpus => 1,
-    :memory => 512,
+    :memory => "512",
     :host_ip => "172.16.0.1",
     :http_port => 9001,
     :mysql_port => 9002,
@@ -18,8 +18,8 @@ def parse_environment()
     :export_dir => "../"
   }
   parsed[:name] = ENV["PHPDEVVM_NAME"] if ENV["PHPDEVVM_NAME"]
-  parsed[:host_ip] = ENV["PHPDEVVM_HOSTIP"] if ENV["PHPDEVVM_HOSTIP"]
-  parsed[:export_dir] = ENV["PHPDEVVM_EXPORTDIR"] if ENV["PHPDEVVM_EXPORTDIR"]
+  parsed[:host_ip] = ENV["PHPDEVVM_HOST_IP"] if ENV["PHPDEVVM_HOST_IP"]
+  parsed[:export_dir] = ENV["PHPDEVVM_EXPORT_DIR"] if ENV["PHPDEVVM_EXPORT_DIR"]
   if ENV["PHPDEVVM_MYSQL"] then
     parsed[:mysql] = true
   end
@@ -31,7 +31,7 @@ def parse_environment()
     parsed[:cpus] = Integer(ENV["PHPDEVVM_CPUS"])
   rescue; end
   begin
-    parsed[:memory] = Integer(ENV["PHPDEVVM_CPUS"])
+    parsed[:memory] = Integer(ENV["PHPDEVVM_MEMORY"])
   rescue; end
   begin
     parsed[:http_port] = Integer(ENV["PHPDEVVM_HTTP_PORT"])
