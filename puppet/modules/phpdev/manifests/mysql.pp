@@ -6,7 +6,7 @@ class phpdev::mysql {
 
   package { 'php5-mysql':
     ensure  => present,
-    require => Package['php5'],
+    require => Package['php5-apache'],
     notify  => Service['apache2'],
   }
 
