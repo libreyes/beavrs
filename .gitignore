@@ -1,0 +1,6 @@
+*~
+.vagrant
+composer.phar
+# should be populated by composer, never checked in
+htdocs/vendor
+vendor
