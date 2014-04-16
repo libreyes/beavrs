@@ -1,4 +1,4 @@
-class phpdev::apache2 {
+class phpdev::apache {
 
   package { 'apache2':
     ensure  => present,

@@ -1,15 +1,21 @@
-class phpdev::php5 {
-  package { 'php5':
+class phpdev::php {
+
+  package {'php5-cli':
     ensure  => present,
     require => Exec['apt-get update'],
-    notify  => Service['apache2']
+  }
+
+  package {'php5-apache':
+    name => 'libapache2-mod-php5',
+    ensure => present,
+    notify  => Service['apache2'],
   }
 
   package { 'php5-curl':
     ensure  => present,
     require => [
       Exec['apt-get update'],
-      Package['curl'],
+      Package['curl','php5-apache'],
     ],
     notify  => Service['apache2']
   }

@@ -9,15 +9,17 @@ def parse_environment()
     :name => "php_dev",
     :cpus => 1,
     :memory => 512,
-    :host_ip => "10.0.10.42",
+    :host_ip => "172.16.0.1",
     :http_port => 9001,
     :mysql_port => 9002,
     :pgsql_port => 9003,
     :mysql => false,
     :pgsql => false,
+    :export_dir => "../"
   }
   parsed[:name] = ENV["PHPDEVVM_NAME"] if ENV["PHPDEVVM_NAME"]
   parsed[:host_ip] = ENV["PHPDEVVM_HOSTIP"] if ENV["PHPDEVVM_HOSTIP"]
+  parsed[:export_dir] = ENV["PHPDEVVM_EXPORTDIR"] if ENV["PHPDEVVM_EXPORTDIR"]
   if ENV["PHPDEVVM_MYSQL"] then
     parsed[:mysql] = true
   end
@@ -59,28 +61,30 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # One for the network as a whole
   config.vm.network "public_network"
 
-  config.vm.synced_folder "../", "/srv/shared"
+  config.vm.synced_folder parsed_env[:export_dir], "/var/www"
 
   config.vm.provider :virtualbox do |vb|
     vb.customize [
       "modifyvm", :id,
-      "--name", args[:name],
-      "--cpus", args[:cpus],
-      "--memory", args[:memory],
+      "--name", parsed_env[:name],
+      "--cpus", parsed_env[:cpus],
+      "--memory", parsed_env[:memory],
     ]
   end
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = "puppet/manifests"
-    puppet.modules_path = "puppet/modules"
+    puppet.module_path = "puppet/modules"
     # Pick a different top level manifest dependent on which engine is required
-    if parsed_env.mysql then
-      if parsed_env.pgsql then
+    if parsed_env[:mysql] then
+      if parsed_env[:pgsql] then
         puppet.manifest_file = "mysql_pgsql.pp"
       else
         puppet.manifest_file = "mysql.pp"
       end
-    elsif parsed_env.pgsql then
+    elsif parsed_env[:pgsql] then
       puppet.manifest_file = "pgsql.pp"
+    else
+      puppet.manifest_file = "nodb.pp"
     end
   end
 end
