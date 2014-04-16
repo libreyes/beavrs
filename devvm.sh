@@ -1,6 +1,6 @@
 #!/bin/sh
 
-pushd vagrant
+pushd deployment
 PHPDEVVM_NAME=beavrs \
 PHPDEVVM_HOST_IP=172.16.0.20 \
 PHPDEVVM_EXPORT_DIR=../htdocs \
