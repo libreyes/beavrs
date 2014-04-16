@@ -1,7 +1,7 @@
 class phpdev::mysql {
   package { 'mysql-server':
     ensure  => latest,
-    require => Exec['apt-update'],
+    require => Exec['apt-get update'],
   }
 
   package { 'php5-mysql':
