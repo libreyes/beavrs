@@ -16,7 +16,7 @@ class phpdev::apache {
      require => Package['apache2'],
      notify  => Service['apache2'],
   }
-
+  
   file { "local site":
     path    => '/etc/apache2/sites-available/local',
     ensure  => present,
@@ -24,5 +24,10 @@ class phpdev::apache {
     require => Package['apache2'],
     notify  => Service['apache2'],
     mode    => 644,
+  }
+  
+  file { '/var/www/index.html':
+    require => Package['apache2'],
+    ensure => absent,
   }
 }
