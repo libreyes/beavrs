@@ -18,8 +18,8 @@ def parse_environment()
     :export_dir => "../"
   }
   parsed[:name] = ENV["PHPDEVVM_NAME"] if ENV["PHPDEVVM_NAME"]
-  parsed[:host_ip] = ENV["PHPDEVVM_HOSTIP"] if ENV["PHPDEVVM_HOSTIP"]
-  parsed[:export_dir] = ENV["PHPDEVVM_EXPORTDIR"] if ENV["PHPDEVVM_EXPORTDIR"]
+  parsed[:host_ip] = ENV["PHPDEVVM_HOST_IP"] if ENV["PHPDEVVM_HOST_IP"]
+  parsed[:export_dir] = ENV["PHPDEVVM_EXPORT_DIR"] if ENV["PHPDEVVM_EXPORT_DIR"]
   if ENV["PHPDEVVM_MYSQL"] then
     parsed[:mysql] = true
   end
