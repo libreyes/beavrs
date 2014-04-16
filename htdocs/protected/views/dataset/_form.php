@@ -400,22 +400,22 @@
             <button class="imgbutton" disabled="true" id="unlockRPS" title="Unlock" onclick="drawing.unlock(); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/unlock.gif" /></button>
             <br />
             <!-- Doodle selection toolbar -->
-            <button class="imgbutton" id="RRDRPS" title="Retinal detachment" onclick="drawing.addDoodle('RRD'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/rrd.gif" /></button>
-            <button class="imgbutton" id="uTearRPS" title="U tear" onclick="drawing.addDoodle('UTear'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/uTear.gif" /></button>
-            <button class="imgbutton" id="roundHoleRPS" title="Round hole" onclick="drawing.addDoodle('RoundHole'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/roundHole.gif" /></button>
-            <button class="imgbutton" id="dialysisRPS" title="Dialysis" onclick="drawing.addDoodle('Dialysis'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/dialysis.gif" /></button>
-            <button class="imgbutton" id="grtRPS" title="GRT" onclick="drawing.addDoodle('GRT'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/grt.gif" /></button>
-            <button class="imgbutton" id="macularHoleRPS" title="Macular hole" onclick="drawing.addDoodle('MacularHole'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/macularHole.gif" /></button>
-            <button class="imgbutton" id="starFoldRPS" title="Star Fold" onclick="drawing.addDoodle('StarFold'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/starFold.gif" /></button>
-            <button class="imgbutton" id="antPVRRPS" title="Anterior PVR" onclick="drawing.addDoodle('AntPVR'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/antPVR.gif" /></button>
-            <button class="imgbutton" id="latticeRPS" title="Lattice" onclick="drawing.addDoodle('Lattice'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/lattice.gif" /></button>
-            <button class="imgbutton" id="cryoRPS" title="Cryo" onclick="drawing.addDoodle('Cryo'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/cryo.gif" /></button>
-            <button class="imgbutton" id="laserCircleRPS" title="Laser" onclick="drawing.addDoodle('LaserCircle'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/laserCircle.gif" /></button>
-            <button class="imgbutton" id="buckleRPS" title="Buckle" onclick="drawing.addDoodle('Buckle'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/buckle.gif" /></button>
+            <button class="imgbutton" id="RRDRPS" title="Retinal detachment" onclick="drawing.addDoodle('RRD'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/RRD.gif" /></button>
+            <button class="imgbutton" id="uTearRPS" title="U tear" onclick="drawing.addDoodle('UTear'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/UTear.gif" /></button>
+            <button class="imgbutton" id="roundHoleRPS" title="Round hole" onclick="drawing.addDoodle('RoundHole'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/RoundHole.gif" /></button>
+            <button class="imgbutton" id="dialysisRPS" title="Dialysis" onclick="drawing.addDoodle('Dialysis'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/Dialysis.gif" /></button>
+            <button class="imgbutton" id="grtRPS" title="GRT" onclick="drawing.addDoodle('GRT'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/GRT.gif" /></button>
+            <button class="imgbutton" id="macularHoleRPS" title="Macular hole" onclick="drawing.addDoodle('MacularHole'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/MacularHole.gif" /></button>
+            <button class="imgbutton" id="starFoldRPS" title="Star Fold" onclick="drawing.addDoodle('StarFold'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/StarFold.gif" /></button>
+            <button class="imgbutton" id="antPVRRPS" title="Anterior PVR" onclick="drawing.addDoodle('AntPVR'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/AntPVR.gif" /></button>
+            <button class="imgbutton" id="latticeRPS" title="Lattice" onclick="drawing.addDoodle('Lattice'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/Lattice.gif" /></button>
+            <button class="imgbutton" id="cryoRPS" title="Cryo" onclick="drawing.addDoodle('Cryo'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/Cryo.gif" /></button>
+            <button class="imgbutton" id="laserCircleRPS" title="Laser" onclick="drawing.addDoodle('LaserCircle'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/LaserCircle.gif" /></button>
+            <button class="imgbutton" id="buckleRPS" title="Buckle" onclick="drawing.addDoodle('Buckle'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/Buckle.gif" /></button>
             <br />
-            <button class="imgbutton" id="retinoschisisRPS" title="Retinoschisis" onclick="drawing.addDoodle('Retinoschisis'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/retinoschisis.gif" /></button>
-            <button class="imgbutton" id="outerleafbreakRPS" title="Outer leaf break" onclick="drawing.addDoodle('OuterLeafBreak'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/outerLeafBreak.gif" /></button>
-            <button class="imgbutton" id="innerleafbreakRPS" title="Inner leaf break" onclick="drawing.addDoodle('InnerLeafBreak'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/innerLeafBreak.gif" /></button>
+            <button class="imgbutton" id="retinoschisisRPS" title="Retinoschisis" onclick="drawing.addDoodle('Retinoschisis'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/Retinoschisis.gif" /></button>
+            <button class="imgbutton" id="outerleafbreakRPS" title="Outer leaf break" onclick="drawing.addDoodle('OuterLeafBreak'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/OuterLeafBreak.gif" /></button>
+            <button class="imgbutton" id="innerleafbreakRPS" title="Inner leaf break" onclick="drawing.addDoodle('InnerLeafBreak'); return false;" ><img src="<?php echo Yii::app()->request->baseUrl; ?>/graphics/InnerLeafBreak.gif" /></button>
             <br /> 
             <!-- add tabindex="1" to canvas after testing and remove highlighted border with css -->
             <canvas class="edit" id="canvas" width="401" height="401"></canvas>
