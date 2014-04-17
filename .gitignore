@@ -1,6 +1,8 @@
 *~
 .vagrant
 composer.phar
+# Logs
+htdocs/protected/runtime/application.log
 # should be populated by composer, never checked in
 htdocs/vendor
 vendor

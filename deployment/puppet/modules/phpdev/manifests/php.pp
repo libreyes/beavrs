@@ -6,9 +6,15 @@ class phpdev::php {
   }
 
   package {'php5-apache':
-    name => 'libapache2-mod-php5',
+    name => 'libapache2-mod-suphp',
     ensure => present,
     notify  => Service['apache2'],
+  }
+
+  package {'php5-apache-nophp':
+    name => 'libapache2-mod-php5',
+    ensure => absent,
+    notify => Service['apache2'],
   }
 
   package { 'php5-curl':
