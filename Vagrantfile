@@ -13,19 +13,13 @@ def parse_environment()
     :http_port => 9001,
     :mysql_port => 9002,
     :pgsql_port => 9003,
-    :mysql => false,
-    :pgsql => false,
-    :export_dir => "../"
+    :export_dir => "../",
+    :manifest => "mysql.pp",
   }
   parsed[:name] = ENV["PHPDEVVM_NAME"] if ENV["PHPDEVVM_NAME"]
   parsed[:host_ip] = ENV["PHPDEVVM_HOST_IP"] if ENV["PHPDEVVM_HOST_IP"]
   parsed[:export_dir] = ENV["PHPDEVVM_EXPORT_DIR"] if ENV["PHPDEVVM_EXPORT_DIR"]
-  if ENV["PHPDEVVM_MYSQL"] then
-    parsed[:mysql] = true
-  end
-  if ENV["PHPDEVVM_PGSQL"] then
-    parsed[:pgsql] = true
-  end
+  parsed[:manifest] = ENV["PHPDEVVM_MANIFEST"] if ENV["PHPDEVVM_MANIFEST"]
   # This is the simplest way to do it safely
   begin
     parsed[:cpus] = Integer(ENV["PHPDEVVM_CPUS"])
@@ -36,16 +30,12 @@ def parse_environment()
   begin
     parsed[:http_port] = Integer(ENV["PHPDEVVM_HTTP_PORT"])
   rescue; end
-  if parsed[:mysql] then
-    begin
-      parsed[:mysql_port] = Integer(ENV["PHPDEVVM_MYSQL_PORT"])
-    rescue; end
-  end
-  if parsed[:pgsql] then
-    begin
-      parsed[:pgsql_port] = Integer(ENV["PHPDEVVM_PGSQL_PORT"])
-    rescue; end
-  end
+  begin
+    parsed[:mysql_port] = Integer(ENV["PHPDEVVM_MYSQL_PORT"])
+  rescue; end
+  begin
+    parsed[:pgsql_port] = Integer(ENV["PHPDEVVM_PGSQL_PORT"])
+  rescue; end
   return parsed
 end
 
@@ -74,17 +64,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.provision :puppet do |puppet|
     puppet.manifests_path = "puppet/manifests"
     puppet.module_path = "puppet/modules"
-    # Pick a different top level manifest dependent on which engine is required
-    if parsed_env[:mysql] then
-      if parsed_env[:pgsql] then
-        puppet.manifest_file = "mysql_pgsql.pp"
-      else
-        puppet.manifest_file = "mysql.pp"
-      end
-    elsif parsed_env[:pgsql] then
-      puppet.manifest_file = "pgsql.pp"
-    else
-      puppet.manifest_file = "nodb.pp"
-    end
+    puppet.manifest_file = parsed_env[:manifest]
   end
 end
