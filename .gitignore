@@ -1,2 +1,6 @@
 *~
 .vagrant
+composer.phar
+htdocs/assets
+htdocs/vendor
+vendor/
