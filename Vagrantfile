@@ -13,12 +13,14 @@ def parse_environment()
     :http_port => 9001,
     :mysql_port => 9002,
     :pgsql_port => 9003,
-    :export_dir => "../",
+    :www_dir => "../",
+    :srv_dir => "../",
     :manifest => "mysql.pp",
   }
   parsed[:name] = ENV["PHPDEVVM_NAME"] if ENV["PHPDEVVM_NAME"]
   parsed[:host_ip] = ENV["PHPDEVVM_HOST_IP"] if ENV["PHPDEVVM_HOST_IP"]
-  parsed[:export_dir] = ENV["PHPDEVVM_EXPORT_DIR"] if ENV["PHPDEVVM_EXPORT_DIR"]
+  parsed[:srv_dir] = ENV["PHPDEVVM_SRV_DIR"] if ENV["PHPDEVVM_SRV_DIR"]
+  parsed[:www_dir] = ENV["PHPDEVVM_WWW_DIR"] if ENV["PHPDEVVM_WWW_DIR"]
   parsed[:manifest] = ENV["PHPDEVVM_MANIFEST"] if ENV["PHPDEVVM_MANIFEST"]
   # This is the simplest way to do it safely
   begin
@@ -51,7 +53,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # One for the network as a whole
   config.vm.network "public_network"
 
-  config.vm.synced_folder parsed_env[:export_dir], "/var/www"
+  config.vm.synced_folder parsed_env[:www_dir], "/var/www"
+  config.vm.synced_folder parsed_env[:srv_dir], "/srv/code"
 
   config.vm.provider :virtualbox do |vb|
     vb.customize [
