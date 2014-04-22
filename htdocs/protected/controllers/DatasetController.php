@@ -445,9 +445,8 @@ class DatasetController extends Controller
 
 	/**
 	 * Reporting functions
-	 * @param integer $id the ID of the report to be run
 	 */
-	public function actionReport($id)
+	public function actionReport()
 	{
 		$this->render('report',array('hasNoData' => false));
 	}
