@@ -501,46 +501,22 @@ class Dataset extends CActiveRecord
      */
     public function tooltipForAttribute($_attribute)
     {
-    	$returnString = "";
-    	
-	    switch ($_attribute)
-	    {
-	    	case 'uuid':
-	    		$returnString = 'An identifier guaranteed to be unique and assigned to this patient. It is printed out with the operation note, and allows identification of the patient record when follow up data is to be entered';
-	    		break;
-		    case 'asmt_vithaem':
-	    		$returnString = 'Grade 0: No blood present in the vitreous, the entire retina is visible.<br /><br />Grade 1: Some haemorrhage present, which obscures between a total of 1 to 5 clock hours of retina.<br /><br />Grade 2: Hemorrhage obscures between a total of 5 to 10 clock hours of central and/or peripheral retina, or a large haemorrhage is located posterior to the equator, with varying clock hours of anterior retina visible.<br /><br />Grade 3: A red reflex is present, with no retinal detail seen posterior to the equator.<br /><br />Grade 4: Dense VH with no red reflex present';
-		        break;
-		    case "fu_date":
-		        $returnString = "Follow up with an attached retina must be for a minimum of 2 months after initial surgery or oil removal for primary success to be achieved. Cases with less than 2 months follow up will not be included in a revalidation audit. It is accepted that in oil cases final follow up reporting to achieve the 2 months follow up after oil removal may need be prolonged depending on the duration of oil tamponade";
-		        break;
-		    case "fu_man_complete":
-		        $returnString = "No additional retinal management planned regardless of the state of the retina<br /><br />For example, this would be true for patients with oil and no plans to remove it";
-		        break;
-		    case "fu_readmission":
-		        $returnString = "Unplanned readmission or surgery for ophthalmic reasons required within 28 days for reasons other than RD and as a complication of the original surgery";
-		        break;
-		    case "fu_attached":
-		        $returnString = "Retinal reattachment is defined as attachment of the retina with no tamponade present, and no subretinal fluid which could spread. This would include those eyes with small traction detachments posterior to a circumferential or encircling buckle. It would also include eyes with anterior fluid walled off by 360 degree retinopexy";
-		        break;
-		    case "fu_iop_problem":
-		        $returnString = "Whether RRD management has induced an ongoing pressure problem (pressure requiring either monitoring or treatment in an eye that had neither pre-operatively)";
-		        break;
-		    case "fu_primary_success":
-		        $returnString = "Primary retinal reattachment is defined as attachment of the retina with no tamponade present, and no subretinal fluid which could spread. This would include those eyes with small traction detachments posterior to a circumferential or encircling buckle. It would also include eyes with anterior SRF walled off by 360 degree retinopexy. It excludes patients who have any intervention to achieve reattachment after the original procedure including laser or intravitreal gas injection";
-		        break;
-		    case "op_pvr_type":
-		    	$returnString = "Grade A is the presence of vitreous cells or haze<br /><br />Grade B is the presence of rolled or irregular edges of a tear or inner retinal surface wrinkling<br /><br />Grade C is the presence of preretinal or subretinal membranes, either anterior to the equator (grade CA) or posterior to the equator (grade CP), and described by the number of clock hours involved";
-		    	break;
-		    case "fu_number_ops":
-		        $returnString = "Total number of operations for retinal detachment prior to this point, including removal of silicone oil";
-		        break;
-		    case "fu_date_of_failure":
-		        $returnString = "If the patient re-attends after the above follow up, and the retina has re-detached, enter the date of failure here";
-		        break;		    		    
-		}
-		
-		return $returnString;
+		$tooltips = array(
+			'uuid' => 'An identifier guaranteed to be unique and assigned to this patient. It is printed out with the operation note, and allows identification of the patient record when follow up data is to be entered',
+		    'asmt_vithaem' => 'Grade 0: No blood present in the vitreous, the entire retina is visible.<br /><br />Grade 1: Some haemorrhage present, which obscures between a total of 1 to 5 clock hours of retina.<br /><br />Grade 2: Hemorrhage obscures between a total of 5 to 10 clock hours of central and/or peripheral retina, or a large haemorrhage is located posterior to the equator, with varying clock hours of anterior retina visible.<br /><br />Grade 3: A red reflex is present, with no retinal detail seen posterior to the equator.<br /><br />Grade 4: Dense VH with no red reflex present',
+			'fu_date' => "Follow up with an attached retina must be for a minimum of 2 months after initial surgery or oil removal for primary success to be achieved. Cases with less than 2 months follow up will not be included in a revalidation audit. It is accepted that in oil cases final follow up reporting to achieve the 2 months follow up after oil removal may need be prolonged depending on the duration of oil tamponade",
+			'fu_man_complete' => "No additional retinal management planned regardless of the state of the retina<br /><br />For example, this would be true for patients with oil and no plans to remove it",
+			'fu_readmission' => "Unplanned readmission or surgery for ophthalmic reasons required within 28 days for reasons other than RD and as a complication of the original surgery",
+			'fu_attached' => "Retinal reattachment is defined as attachment of the retina with no tamponade present, and no subretinal fluid which could spread. This would include those eyes with small traction detachments posterior to a circumferential or encircling buckle. It would also include eyes with anterior fluid walled off by 360 degree retinopexy",
+			'fu_iop_problem' => "Whether RRD management has induced an ongoing pressure problem (pressure requiring either monitoring or treatment in an eye that had neither pre-operatively)",
+			'fu_primary_success' => "Primary retinal reattachment is defined as attachment of the retina with no tamponade present, and no subretinal fluid which could spread. This would include those eyes with small traction detachments posterior to a circumferential or encircling buckle. It would also include eyes with anterior SRF walled off by 360 degree retinopexy. It excludes patients who have any intervention to achieve reattachment after the original procedure including laser or intravitreal gas injection",
+			'op_pvr_type' => "Grade A is the presence of vitreous cells or haze<br /><br />Grade B is the presence of rolled or irregular edges of a tear or inner retinal surface wrinkling<br /><br />Grade C is the presence of preretinal or subretinal membranes, either anterior to the equator (grade CA) or posterior to the equator (grade CP), and described by the number of clock hours involved",
+			'fu_number_ops' => "Total number of operations for retinal detachment prior to this point, including removal of silicone oil",
+			'fu_date_of_failure' => "If the patient re-attends after the above follow up, and the retina has re-detached, enter the date of failure here",
+		);
+		return (
+			array_key_exists($_attribute, $tooltips) ? $tooltips[$_attribute] : ""
+		);
     }
     
 	/**
