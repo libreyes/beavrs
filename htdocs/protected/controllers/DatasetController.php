@@ -26,7 +26,7 @@ class DatasetController extends Controller
 	public function accessRules()
 	{
 		return array(
-			array('allow',	// allow all users to perform 'index' and 'view' actions
+			array('allow', // allow all users to perform 'index' and 'view' actions
 				'actions'=>array('index'),
 				'users'=>array('*'),
 			),
@@ -38,7 +38,7 @@ class DatasetController extends Controller
 				'actions'=>array('admin','delete'),
 				'users'=>array('admin'),
 			),
-			array('deny',  // deny all users
+			array('deny', // deny all users
 				'users'=>array('*'),
 			),
 		);
@@ -267,60 +267,63 @@ class DatasetController extends Controller
 	/**
 	 * Reuse for reporting
 	 */
-	protected function userCriteria() {
+	protected function userCriteria()
+	{
 		// Confine reports to user data
 		$criteria = new CDbCriteria;
 		$criteria->addColumnCondition(array('userId' => Yii::app()->user->id));
-    return $criteria;
+		return $criteria;
 	}
 
 	/**
 	 * The demographics report
 	 */
-	public function actionDemographics() {
+	public function actionDemographics()
+	{
 		$reportArray = array();
-    $criteria = $this->userCriteria();
+		$criteria = $this->userCriteria();
 		$model=new Dataset('search');
 		$reportArray['total'] = $model->count($criteria);
 		
-		if ($reportArray['total'] > 0) {
-			// Get average age
-			$criteria->select='SUM(pt_age) as intResult';
-			$res = $model->find($criteria);
-			$reportArray['average_age'] = round($res->intResult/$reportArray['total'], 0);
+		if ($reportArray['total'] < 1)
+			return $this->render('report', array('hasNoData' => true));
 		
-			// Get minimum age
-			$criteria->select='MIN(pt_age) as intResult';
-			$res = $model->find($criteria);
-			$reportArray['min_age'] = $res->intResult;
+		// Get average age
+		$criteria->select='SUM(pt_age) as intResult';
+		$res = $model->find($criteria);
+		$reportArray['average_age'] = round($res->intResult/$reportArray['total'], 0);
 		
-			// Get maximum age
-			$criteria->select='MAX(pt_age) as intResult';
-			$res = $model->find($criteria);
-			$reportArray['max_age'] = $res->intResult;
+		// Get minimum age
+		$criteria->select='MIN(pt_age) as intResult';
+		$res = $model->find($criteria);
+		$reportArray['min_age'] = $res->intResult;
 		
-			$criteria->addColumnCondition(array('pt_sex' => 'Male'));
-			$reportArray['male'] = $model->count($criteria);
-			$reportArray['male_percent'] = round(100 * $reportArray['male']/$reportArray['total'], 0);
-			$reportArray['female'] = $reportArray['total'] - $reportArray['male'];
-			$reportArray['female_percent'] = round(100 * $reportArray['female']/$reportArray['total'], 0);
-			
-			$this->render('demographics',array('reportArray'=>$reportArray));
-		} else {
-			$this->render('report', array('hasNoData' => true));
-    }
+		// Get maximum age
+		$criteria->select='MAX(pt_age) as intResult';
+		$res = $model->find($criteria);
+		$reportArray['max_age'] = $res->intResult;
+		
+		$criteria->addColumnCondition(array('pt_sex' => 'Male'));
+		$reportArray['male'] = $model->count($criteria);
+		$reportArray['male_percent'] = round(100 * $reportArray['male']/$reportArray['total'], 0);
+		$reportArray['female'] = $reportArray['total'] - $reportArray['male'];
+		$reportArray['female_percent'] = round(100 * $reportArray['female']/$reportArray['total'], 0);
+		
+		$this->render('demographics',array('reportArray'=>$reportArray));
 	}
 	
 	/**
 	 * The detachment report
 	 */
-	public function actionDetachment() {
+	public function actionDetachment()
+	{
 		$reportArray = array();
-    $criteria = $this->userCriteria();
+		$criteria = $this->userCriteria();
 		$model=new Dataset('search');
 		$reportArray['total'] = $model->count($criteria);
 
-		if ($reportArray['total'] > 0) {
+		if ($reportArray['total'] > 0)
+		{
 			// Extent
 			$criteria->select='SUM(op_extent_st) as intResult';
 			$res = $model->find($criteria);
@@ -394,7 +397,9 @@ class DatasetController extends Controller
 			$reportArray['left_percent'] = round(100 * $reportArray['left']/$reportArray['total'], 0);
 			
 			$this->render('detachment',array('reportArray'=>$reportArray));
-		} else {
+		}
+		else
+		{
 			$this->render('report', array('hasNoData' => true));
     }
 	}
@@ -402,7 +407,8 @@ class DatasetController extends Controller
 	/**
 	 * Things that I think used to be in the detachment report, but aren't any more. Don't know if these should be deleted
 	 */
-	private function stuffFromThatComment() {
+	private function stuffFromThatComment()
+	{
 		// Surgery type
 		/*
 			$criteria->select="SUM(CASE WHEN `op_pvr_type` LIKE 'None' THEN 1 ELSE 0 END) AS intResult";
