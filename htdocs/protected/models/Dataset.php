@@ -474,8 +474,7 @@ class Dataset extends CActiveRecord
      */
     public function fuManCompleteAsText()
     {
-        if ($this->fu_man_complete == 0) return "No";
-        else return "Yes";        
+        return ($this->fu_man_complete == 0) ? "No" : "Yes";
     }
 
     /**
@@ -483,8 +482,7 @@ class Dataset extends CActiveRecord
      */
     public function fuAttachedAsText()
     {
-        if ($this->fu_attached == 0) return "No";
-        else return "Yes";        
+        return ($this->fu_attached == 0) ? "No" : "Yes";
     }
 
     /**
@@ -492,8 +490,7 @@ class Dataset extends CActiveRecord
      */
     public function fuPrimaryPuccessAsText()
     {
-        if ($this->fu_primary_success == 0) return "No";
-        else return "Yes";        
+        return ($this->fu_primary_success == 0) ? "No" : "Yes";
     }
     
     /**
