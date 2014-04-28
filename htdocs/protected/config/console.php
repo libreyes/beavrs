@@ -20,8 +20,8 @@ return array(
 		'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=rrd_dataset',
 			'emulatePrepare' => true,
-			'username' => 'bill',
-			'password' => 'aylward',
+			'username' => 'rrd_dataset',
+			'password' => 'rrd_dataset',
 			'charset' => 'utf8',
 			'tablePrefix' => 'tbl_',
 		),
