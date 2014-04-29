@@ -7,6 +7,10 @@
 class PasswordCrypto
 {
 	/**
+	 * Needed to work as a component
+	 */
+	public function init() {}
+	/**
 	 * Given a password, a hashed password and an optional salt (in case you're using salted md5),
 	 * attempts to match the password. If md5 is being used, will return a crypt()
 	 * @param $password string The plaintext password provided by the user
