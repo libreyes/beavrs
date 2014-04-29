@@ -52,6 +52,7 @@ class SiteController extends Controller
 	public function actionSignUp()
 	{
 		$model=new SignUpForm;
+		$pc = Yii::app()->passwordCrypto;
 		if(isset($_POST['SignUpForm']))
 		{
 			$model->attributes=$_POST['SignUpForm'];
@@ -72,7 +73,7 @@ class SiteController extends Controller
 
 					$newUser= new User;
 					$newUser->username = $model->username;
-					$newUser->password = md5($model->password);
+					$newUser->password = Yii::app()->passwordCrypto->hash($model->password);
 					$newUser->grade = $model->grade;
 					$newUser->codeword = $model->codeword;					
 					$newUser->first_name='generic';

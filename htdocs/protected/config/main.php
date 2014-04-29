@@ -77,6 +77,9 @@ return array(
 */
 			),
 		),
+		'passwordCrypto' => array(
+			'class' => 'PasswordCrypto',
+		),
 	),
 
 	// application-level parameters that can be accessed

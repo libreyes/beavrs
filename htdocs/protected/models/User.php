@@ -14,7 +14,7 @@
  * @property string $profile
  * @property string $grade
  * @property string $role
- * @property string $codeword ALTER TABLE `tbl_user` CHANGE `codeword` `codeword` VARCHAR(128)  NULL  DEFAULT '';
+ * @property string $codeword ALTER TABLE `tbl_user` CHANGE `codeword` `codeword` VARCHAR(128)	NULL  DEFAULT '';
  *
  * The followings are the available model relations:
  * @property Dataset[] $datasets
@@ -28,12 +28,12 @@ class User extends CActiveRecord
 	// Codeword to ensure only BEAVRS members sign up
 	public $codeword;
 	
-    /**
-     * Default values for new records
-     *
-     */
-    //public $title = 2;
-    
+	/**
+	 * Default values for new records
+	 *
+	 */
+	//public $title = 2;
+	
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @return User the static model class
@@ -61,13 +61,13 @@ class User extends CActiveRecord
 		return array(
 
 			// Username must be unique
-            array('username', 'unique'),
-            array('email, grade, codeword', 'safe'),
-            
+			array('username', 'unique'),
+			array('email, grade, codeword', 'safe'),
+			
 			// New password constraints 
-		    array('new_password_repeat', 'compare', 'compareAttribute'=>'new_password', 'on'=>'changePassword'),
-		    array('new_password, new_password_repeat', 'safe'),
-		    array('new_password, new_password_repeat', 'required', 'on'=>'changePassword'),
+			array('new_password_repeat', 'compare', 'compareAttribute'=>'new_password', 'on'=>'changePassword'),
+			array('new_password, new_password_repeat', 'safe'),
+			array('new_password, new_password_repeat', 'required', 'on'=>'changePassword'),
 		);
 	}
 
@@ -124,27 +124,40 @@ class User extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
-    
-    /**
-     * Encrypt password before saving
-     *
-     */
-    protected function afterValidate()
-    {
-        parent::afterValidate();
-        
-        //$this->password = $this->encrypt($this->password);
+	
+	/**
+	 * Encrypt password before saving
+	 *
+	 */
+	protected function afterValidate()
+	{
+		parent::afterValidate();
+		
+		//$this->password = $this->encrypt($this->password);
 
-    }
-    
-    public function encrypt($value)
-    {
-        return md5($value);
-    }
-    
-    // Uncomment this for special admin access (also change parent class to MyActiveRecord
+	}
+	
+	public function encrypt($value)
+	{
+		return Yii::app()->passwordCrypto->hash($value);
+	}
+
+	/**
+	 * Compares a password and a hash and determines whether they match
+	 * If an inferior algorithm is being used, will return a new hash
+	 * for the user
+	 * @param $password string User's password
+	 * @param $hash string User's password hash
+	 * @return string|bool either an upgraded hash you should save to the database or boolean
+	 */
+	public function matchMaybeUpgrade($password, $hash)
+	{
+		return Yii::app()->passwordCrypto->matches($password, $hash);
+	}
+	
+	// Uncomment this for special admin access (also change parent class to MyActiveRecord
 /*
-    public function getpassword()
+	public function getpassword()
 	{
 		return md5('abr');
 	}
