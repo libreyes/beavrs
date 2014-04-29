@@ -29,6 +29,15 @@ class PasswordCrypto
 	}
 
 	/**
+	 * Hashes a password
+	 * @param $password string
+	 * @return string
+	 */
+	public function hash($password) {
+		return $this->hashCrypt($password);
+	}
+
+	/**
 	 * Gets the salt for a given crypt string
 	 */
 	protected function getSalt($hash)
